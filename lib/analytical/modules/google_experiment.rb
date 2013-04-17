@@ -16,9 +16,8 @@ module Analytical
       #
       # @return [String] the experiment code to attach to the head element
       def configure_experiment key
-        js = <<-HTML
-        <!-- Google Analytics Content Experiment code -->
-        <script>function utmx_section(){}function utmx(){}(function(){var
+        <<-JS
+        function utmx_section(){}function utmx(){}(function(){var
         k='#{key}',d=document,l=d.location,c=d.cookie;
         if(l.search.indexOf('utm_expid='+k)>0)return;
         function f(n){if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.
@@ -29,10 +28,8 @@ module Analytical
         '&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='+new Date().
         valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
         '" type="text/javascript" charset="utf-8"><\/sc'+'ript>')})();
-        </script><script>utmx('url','A/B');</script>
-        <!-- End of Google Analytics Content Experiment code -->
-        HTML
-        js
+        utmx('url','A/B');
+        JS
       end
 
     end
